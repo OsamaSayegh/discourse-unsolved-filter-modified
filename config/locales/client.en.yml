@@ -3,9 +3,14 @@ en:
     topics:
       bottom:
         unsolved: "There are no more unsolved topics."
+        myunsolved: "You don't have additional unsolved topics."
       none:
         unsolved: "There are no unsolved topics."
+        myunsolved: "You don't have unsolved topics."
     filters:
       unsolved:
         title: "Unsolved"
         help: "Unsolved topics"
+      myunsolved:
+        title: "My Unsolved"
+        help: "My unsolved topics"
