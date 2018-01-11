@@ -20,7 +20,16 @@ after_initialize do
         ) OR topics.id IN (
           SELECT tc.topic_id
           FROM topic_custom_fields tc
-          WHERE tc.name = 'solved_state' AND (tc.value = 'unsolved' OR tc.value = '')
+          WHERE tc.name = 'solved_state' AND (tc.value = 'unsolved')
+        ) AND topics.id NOT IN (
+          SELECT tc.topic_id
+          FROM topic_custom_fields tc
+          WHERE (tc.name = 'solved_state' AND tc.value = '') AND tc.topic_id NOT IN (
+            SELECT tc.topic_id
+            FROM topic_custom_fields tc
+            WHERE ((tc.name = 'accepted_answer_post_ids' OR tc.name = 'accepted_answer_post_id')
+            AND tc.value IS NOT NULL)
+          )
         )").where("topics.id NOT IN (
           SELECT cats.topic_id
           FROM categories cats WHERE cats.topic_id IS NOT NULL
